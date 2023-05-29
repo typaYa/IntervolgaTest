@@ -7,6 +7,22 @@
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
+
+/*DELIMITER //
+CREATE TRIGGER count_id
+BEFORE INSERT
+ON winners
+FOR EACH ROW
+SELECT id, COUNT(id) INTO id_,COUNT(id)_ from tournament GROUP BY id
+IF NEW.COUNT(id)_>3 THEN
+SIGNAL SQLSTATE '45000'
+
+END IF//
+DELIMITER ;*/
+
+
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
