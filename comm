@@ -1,11 +1,7 @@
-DELIMITER //
-CREATE TRIGGER count_id
-BEFORE INSERT
-ON winners
-FOR EACH ROW
-SELECT id, COUNT(id) INTO id_,COUNT(id)_ from tournament GROUP BY id
-IF NEW.COUNT(id)_>3 THEN
-SIGNAL SQLSTATE '45000'
-
-END IF//
-DELIMITER ;
+CREATE UNIQUE INDEX test on winners(id_tournament,id_sportsmen)
+ALTER TABLE winners
+ADD CONSTRAINT chkCol1ValueMin CHECK (id_sportsmen >= 3 );
+ALTER TABLE winners
+ADD CONSTRAINT chkCol1ValueMax CHECK (id_sportsmen <= 3 );
+ 
+ дополнение к 3 заданию, юез использования тригера
