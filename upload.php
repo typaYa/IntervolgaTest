@@ -14,12 +14,12 @@ define('UPLOAD_DIR',$_SERVER['DOCUMENT_ROOT'].'/uploads/');
 if(isset($_POST['upload'])){
 
     if (($file = $_FILES['filename'])!==false){
-
+        mkdir('uploads');
         $name = "uploads/" . $_FILES["filename"]["name"];
         move_uploaded_file($_FILES["filename"]["tmp_name"], $name);
         echo "Файл загружен";
         if(($file = fopen('uploads/'.$_FILES["filename"]["name"],'r'))!==false){
-
+       
             while (($data = fgetcsv($file,1000,';'))!== false){
                 $j = 1;
                 for ($i=0;$i<count($data);$i++){
